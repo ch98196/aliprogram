@@ -1,0 +1,88 @@
+<view class="page">
+
+  <container>
+    <view class="page-body">
+      <view class="page-body-title">地下偶像活动抽选系统</view>
+      <block a:if="{{condition >= 0}}">
+        <text class="page-body-text-result">{{list[condition-1]}}</text>
+        <text class="page-body-text-tip" style="text-align: center; line-height: 1.8;">
+          {{ isMotto ? '抽取中，请稍候' : '活动名称：'+activityName+'\n生成时间：'+systemTime}}
+        </text>
+      </block>
+      <block a:elif="{{activityName.length < 2 || list.length < 2}}">
+        <text class="page-body-text">配置后开始抽选</text>
+      </block>
+      <block a:else>
+        <text class="page-body-text">请确认当前活动名称</text>
+        <text class="page-body-text-small">{{activityName}}</text>
+        <text class="page-body-text-tip">{{isEdit ? '保存配置以开始抽选' : ''}}</text>
+      </block>
+    </view>
+    <view class="content">
+      <view class="box">
+        <button
+          a:if="{{!isEdit}}"
+          type="default"
+          inline
+          style="width: 85%;"
+          disabled="{{isMotto}}"
+          onTap="{{isMotto ? '' : 'edit'}}"
+        >
+          {{isMotto ? '不可配置' : '配置名单'}}
+        </button>
+        <button a:else type="default" inline style="width: 85%;" onTap="save">
+          保存配置
+        </button>
+      </view>
+      <view class="box">
+        <button
+          type="primary"
+          inline
+          style="width: 85%;"
+          disabled="{{isMotto || isEdit || activityName.length < 2 || list.length < 2}}"
+          onTap="{{isMotto || isEdit ? '' : 'startMotto'}}"
+        >
+          {{isMotto ? '抽取中 ('+ count +')' : '开始抽选'}}
+        </button>
+      </view>
+    </view>
+  </container>
+
+
+
+  <container title="抽选名单">
+    <view slot="headerRight">(共{{list.length}}个) {{isEdit ? '点击标签以删除' : ''}}</view>
+    <view style="margin-bottom: 12rpx; line-height: 24px;">
+      <block a:for="{{ list }}">
+        <view
+          class="tag"
+          style="display: inline-flex"
+          onTap="{{isEdit ? 'delete' : ''}}"
+          data-item="{{item}}"
+        >
+          <tag type="fill-light">{{item}}</tag>
+        </view>
+      </block>
+    </view>
+    <divider a:if="{{isEdit}}" />
+    <input
+      a:if="{{isEdit}}"
+      placeholder="输入团体名称，按回车键新增"
+      value="{{inputValue}}"
+      onBlur="clear"
+      onChange="change"
+      onConfirm="add"
+    />
+  </container>
+
+  <container a:if="{{isEdit}}" title="活动名称">
+    <input placeholder="请输入活动名称" value="{{activityName}}" onChange="bindInput" />
+  </container>
+
+  <container a:if="{{isEdit}}" title="抽选时长">
+    <radio-group options="{{options}}" defaultValue="{{setTime}}" range-key="label" onChange="bindPickerChange" position="horizontal" />
+  </container>
+
+  
+
+</view>

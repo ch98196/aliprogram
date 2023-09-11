@@ -1,0 +1,63 @@
+.page {
+  height: 100%;
+  padding: 16px;
+}
+
+.tag:not(:last-child) {
+  margin-right: 16rpx;
+}
+
+.ant-list-item-line{
+  padding: 12px 0;
+}
+
+.ant-list-item-content-container{
+  max-width: 5.4em;
+}
+
+.content {
+  display: flex;
+}
+
+.content .box {
+  flex: 1;
+  text-align: center;
+}
+
+.content .box:not(:first-of-type) {
+  margin-left: 16rpx;
+}
+
+.page-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 24px 0 24px 0;
+}
+
+.page-body-title {
+  margin-bottom: 32px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.page-body-text {
+  font-size: 14px;
+  line-height: 26px;
+}
+
+.page-body-text-small {
+  font-size: 12px;
+  line-height: 24px;
+}
+
+.page-body-text-tip {
+  font-size: 12px;
+  line-height: 24px;
+  margin-top: 24px;
+}
+
+.page-body-text-result {
+  font-size: 24px;
+}
